@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+    web:
+        build: docker/web
+        ports:
+            - "8080:80"
+            - "44380:443"
+        volumes:
+            - .:/var/www/html/
+
+    db:
+        image: mariadb:10.6
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: toor
+            MYSQL_DATABASE: prestashop
+            MYSQL_USER: prestashop
+            MYSQL_PASSWORD: prestashop
+        volumes:
+            - db:/var/lib/mysql
+
+volumes:
+    db: ~
